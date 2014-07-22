@@ -1,0 +1,99 @@
+// Vars
+$blue: #4da883;
+$blueSecondary: #54ba90;
+$warn: #cc9867;
+$alert: #cec869;
+$good: #a9d06c;
+$lightGrey: #e0e0e0;
+
+.active {
+  background-color: $warn;
+}
+
+.center {
+  text-align: center;
+}
+
+abbr[title] {
+  border-color: $blue;
+  cursor: help;
+}
+
+.initialism {
+  font-size: 90%;
+  text-transform: uppercase;
+}
+
+.articles-section {
+  h2 {
+    text-align: initial;
+  }
+}
+
+a {
+  &:visited, &:link {
+    color: $blue;
+    text-decoration: none;
+  }
+  &:hover, &:link:hover {
+    color: $warn;
+    border-bottom: 2px solid $warn;
+  }
+}
+
+::selection {
+  background-color: $blueSecondary;
+}
+
+.topbar {
+  transition: transform 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955); //cubic-bezier(0.455, 0.030, 0.515, 0.955);
+  &--pinned {
+    transform: translateY(0px);
+  }
+  &--unpinned {
+  transform: translateY(-55px);
+  }
+}
+.app-bar {
+  background-color: rgba(255, 255, 255, .97);
+  pointer-events: none;
+  height: 30px;
+  border-bottom: 3px solid $blueSecondary;
+  button.menu, button.link-to-top {
+    height: 30px;
+    width: 30px;
+    pointer-events: initial;
+    transition: color 500ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    & a {
+      color: #000;
+    }
+    &:hover, & a:hover {
+      border-bottom: none;
+      color: $blueSecondary;
+    }
+    &:focus, & a:focus {
+      outline: 0;
+    }
+  }
+}
+
+.navdrawer-container {
+  position: fixed;
+  background-color: $blueSecondary;
+  h4 {
+    color: $blue;
+    border-right: 5px solid $blueSecondary;
+  }
+  ul {
+    // border-top: 1px solid #fff;
+    li {
+      a {
+        border-bottom: none !important;
+      }
+    }
+  }
+}
+
+#summary {
+  // position: fixed;
+}
