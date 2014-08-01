@@ -24,10 +24,10 @@
     <!-- build:css styles/components/main.min.css -->
     <link rel="stylesheet" href="styles/h5bp.css">
     <link rel="stylesheet" href="styles/components/components.css">
-    <link rel="stylesheet" href="styles/font-awesome.min.css">
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/global.css">
     <!-- endbuild -->
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/global.css">
   </head>
   <body id="#navigation">
   <header class="app-bar promote-layer topbar">
@@ -46,34 +46,36 @@
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <main>
+
    <section class="page-header" id="summary">
     <div class="container">
       <h1>Victor Szeto</h1>
       <p class="page-header__excerpt g-wide--push-1 g-wide--pull-1 text-divider">Computer Engineering at the <a href="http://www.uwaterloo.ca">University of Waterloo</a>. Interned at <a href="http://www.getturnstyle.com/">Turnstyle Solutions</a>.</p>
       <ul class="list-center list--reset clear">
-      <li class="list__item g-medium--half g-wide--1"><a href="#no-link"><i class="fa fa-comment-o fa-fw"></i>Blog</a></li>
-      <li class="list__item g-medium--half g-wide--1 g--last"><a href="https://www.github.com/victorvation"><i class="fa fa-github fa-fw"></i>Github</a></li>
-      <li class="list__item g-medium--half g-wide--1"><a href="#no-link"><i class="fa fa-list-ul fa-fw fa"></i>Resume</a></li>
-      <li class="list__item g-medium--half g-wide--1 g--last"><a href="#no-link"><i class="fa fa-linkedin fa-fw"></i>Linkedin</a></li>
+<!--       <li class="list__item g-medium--half g-wide--1"><a class="button--primary" href="#no-link"><i class="fa fa-comment-o fa-fw"></i>Blog</a></li> -->
+      <li class="list__item g-medium--half g-wide--1"><a class="button--primary" href="mailto:me@victorszeto.com"><i class="fa fa-envelope-o fa-fixed"></i> Email</a></li>
+      <li class="list__item g-medium--half g-wide--1 g--last"><a class="button--primary" href="https://www.github.com/victorvation"><i class="fa fa-github fa-fw"></i>Github</a></li>
+      <li class="list__item g-medium--half g-wide--1"><a class="button--primary" href="https://www.victorszeto.com/documents/VictorSzetoW14.pdf"><i class="fa fa-list-ul fa-fw fa"></i>Resume</a></li>
+      <li class="list__item g-medium--half g-wide--1 g--last"><a class="button--primary" href="https://www.linkedin.com/profile/view?id=303299007"><i class="fa fa-linkedin fa-fw"></i>Linkedin</a></li>
       </ul>
     </div>
     </section>
     <section class="article-item" id="about">
       <div class="featured-spotlight">
         <div class="container">
-          <h2>About</h2>
-          <p class="container center">Hi, I'm Victor Szeto. I am a Computer Engineering student at the University of Waterloo. I interned as a software developer at Turnstyle Solutions in Toronto, Ontario during the summer of 2014. I am currently a moderator of <a href="http://omguw.com">OMGUW</a> and an Engineering Orientation Leader for Fall 2014.</p>
+          <h2>About.</h2>
+          <p class="container center">Hi, I'm Victor Szeto. I am a Computer Engineering student at the University of Waterloo. I interned as a full stack software engineer at Turnstyle Solutions in Toronto, Ontario during the summer of 2014. I am currently a moderator of <a href="http://omguw.com">OMGUW</a> and an Engineering Orientation Leader for Fall 2014.</p>
         </div>
       </div>
     </section>
     <section id="projects">
       <div class="articles-section">
         <div class="container">
-          <h2>Projects</h2>
+          <h2>Projects.</h2>
             <ol class="articles-list">
                 <li class="articles-list__item">
                     <h3 class="xlarge"><a href="http://victorvation.github.io/DMCalc">DMCalc</a></h3>
@@ -92,7 +94,7 @@
                     </ul>
                 </li>
                 <li class="articles-list__item">
-                    <h3 class="xlarge"><a href="http://victorvation.github.io/signal-intensity">Quest-MarkScraper</a></h3>
+                    <h3 class="xlarge"><a href="http://www.github.com/victorvation/signal-intensity">Quest-MarkScraper</a></h3>
                     <p class="g-wide--3 g--centered">Quest-MarkScraper is a simple API written in Node that scrapes your current term's grades from Waterloo's Quest website and returns them in a JSON response.</p>
                     <ul class="list-center list--reset clear">
                     <li class="list__item g-wide--2 g-medium--half g--last"><a href="http://www.github.com/victorvation/quest-markscraper"><i class="fa fa-github"></i> View source on Github</a></li>
@@ -102,9 +104,16 @@
                     <h3 class="large">Other Projects / Contributed To</h3>
                     <p></p>
                     <ul class="list-center list--reset clear">
-                      <li class="list__item g--third"><a href="http://shahmeer.co/ultimate-tictactoe/">Ultimate TicTacToe</a><p>An HTML5 game made in 24 hours with a team of four for the Waterloo Facebook Hackathon. It's Tic-Tac-Toe, but with nested tic-tac-toe boards in each square, <a href="http://mathwithbaddrawings.com/2013/06/16/ultimate-tic-tac-toe/">thus making it ultimate</a>.</p></li>
-                      <li class="list__item g--third"><a href="http://github.com/victorvation/pycraps/">pyCraps</a><p>A Python 3 command line implementation of Craps that I made in high school.</p></li>
-                      <li class="list__item g--third g--last">a</li>
+                      <li class="list__item g--third">
+                        <a href="http://shahmeer.co/ultimate-tictactoe/">Ultimate TicTacToe</a>
+                        <p>An HTML5 game made in 24 hours with a team of four for the Waterloo Facebook Hackathon. It's Tic-Tac-Toe, but with nested tic-tac-toe boards in each square, <a href="http://mathwithbaddrawings.com/2013/06/16/ultimate-tic-tac-toe/">thus making it ultimate</a>.</p></li>
+                      <li class="list__item g--third">
+                        <a href="http://github.com/victorvation/pycraps/">pyCraps</a>
+                        <p>A Python 3 command line implementation of Craps that I made in high school.</p></li>
+                      <li class="list__item g--third g--last">
+                        <a href="https://github.com/srules/DeckSlot9">DeckSlot9</a>
+                        <p>A card deck organizer for <a href="http://us.battle.net/hearthstone/en/?-">Hearthstone</a> written in C#. I contributed bugfixes and added drag-and-drop functionality and automatic application launching for their .deck files, as well as improving their user instructions interface.</p>
+                      </li>
                     </ul>
                 </li>
             </ol>
@@ -114,19 +123,26 @@
     <section class="featured-section" id="experience">
       <div class="featured-section">
           <div class="container-medium">
-            <h2>Experience</h2>
+            <h2>Experience.</h2>
               <ul class="featured-list">
                   <li class="featured-list__item clear">
                       <div class="container-small">
                           <div class="featured-list__content g--half">
-                              <h3>Turnstyle Solutions</h3>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, incidunt harum aut quae eaque sequi sunt molestiae tenetur vitae.</p>
-                              <a href="#ignore-click" class="cta--primary">View Google</a>
+                              <h3><a href="http://getturnstyle.com">Turnstyle Solutions</a> <small>May → Aug. 2014</small></h3>
+                              <p class="tagline">Full Stack Developer</p>
                           </div>
                           <div class="featured-list__img-wrapper g--half g--last">
                               <div class="featured-list__img">
                                   <img src="../images/turnstyle.png" alt="Turnstyle">
                               </div>
+                          </div>
+                          <div class="g-wide--3 g-medium--3">
+                            <ul class="list-center">
+                            <li>Created a job scheduler in Node.js with a real-time API to send emails and tweets to customers at client-specified times</li>
+                            <li>Created an automatic email system to alert clients when their wifi is offline, as well as send email reports with weekly visitor data.</li>
+                            <li>Created the front-end for a ZenDesk integrated customer support system, increasing client relations and reducing frustration for non-technical clients.</li>
+                            <li>Worked on projects across the entire stack using a wide variety of technologies including JavaScript, Node.js, Backbone, Marionette, D3, PHP, mySQL.</li>
+                            </ul>
                           </div>
                       </div>
                   </li>
@@ -135,24 +151,35 @@
       </div>
     </section>
     <section>
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <div class="contactbox" id="contact">
+        <div class="container">
+          <h2>Find me.</h2>
+            <ul class="list--reset list-center clear">
+              <div class="g-wide--3 g-centered">
+              <a class="button--primary" href="mailto:me@victorszeto.com"><i class="fa fa-envelope-o fa-fixed"></i></a>
+              <a class="button--primary" href="https://www.github.com/victorvation"><i class="fa fa-github fa-fixed"></i></a> <a class="button--primary" href="https://www.linkedin.com/profile/view?id=303299007"><i class="fa fa-linkedin fa-fixed"></i></a>
+              <a class="button--primary" href="https://www.victorszeto.com/documents/VictorSzetoW14.pdf"><i class="fa fa-list fa-fixed"></i></a>
+              <a class="button--primary" href="https://www.instagram.com/victorvation"><i class="fa fa-instagram fa-fixed"></i></a>
+              </div>
+        </div>
+      </div>
     </section>
-  </main>
+    <footer>
+      <div class="copyright container-small">
+        <p class="right small" style="font-face: Courier;">(<span class="hl"><i class="fa fa-heart-o"></i></span> vis)</p>
+      </div>
+    </footer>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/headroom/0.6.0/headroom.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/headroom/0.6.0/jQuery.headroom.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/enquire.js/2.0.0/enquire.min.js"></script>
     <script src="scripts/app.js"></script>
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-XXXXX-X');
+      ga('create', 'UA-46624647-1');
       ga('send', 'pageview');
     </script>
     <!-- Built with love using Web Starter Kit -->

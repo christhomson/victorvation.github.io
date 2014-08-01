@@ -1,5 +1,5 @@
 var headroomOptions = {
-  offset: 300,
+  offset: 120,
   tolerance: 5,
   classes: {
     initial: 'topbar',
@@ -41,8 +41,13 @@ $(function(){
   $appbarElement.headroom(headroomOptions);
 
   // Smooth scrolling for top button
-  $('.app-bar-actions .link-to-top', '#navigation').on('click', function() {
-    $('html, body').animate({ scrollTop: 0 }, 'slow');
+  $('button.link-to-top').on('click', function() {
+    $('html, body').animate({ scrollTop: 0 }, 'slow')
+    .promise().done(function() {
+      // setTimeout(function() {
+         unpinTopbar();
+       // }, 500);
+    });
     return false;
   });
 
@@ -62,12 +67,7 @@ $(function(){
 
         // Wait till we're done scrolling.
         $('html, body').promise().done(function() {
-          var pinnedElement = $navdrawerElement.hasClass('topbar--pinned')
-            ? $navdrawerElement
-            : $appbarElement;
-
-          // Unpin the element and close the menu
-          pinnedElement.data().headroom.unpin();
+          unpinTopbar();
           closeMenu();
         });
       }
@@ -75,9 +75,23 @@ $(function(){
     });
   });
 
+  $('.fa-heart-o').on('mouseover mouseout', function() {
+    $(this).toggleClass('fa-spin');
+  });
+
+  var unpinTopbar = function() {
+    var pinnedElement = $navdrawerElement.hasClass('topbar--pinned')
+      ? $navdrawerElement
+      : $appbarElement;
+
+    // Unpin the element and close the menu
+    pinnedElement.data().headroom.unpin();
+  }
+
   // Media query callbacks
   enquire.register('(min-width: 990px)', {
     match: function() {
+
       // Pin `.navdrawer-container`
       $navdrawerElement.headroom(headroomOptions);
       $navdrawerElement.on('mouseover', function() {
@@ -92,6 +106,7 @@ $(function(){
       }
     },
     unmatch: function() {
+
       // Pin `.app-bar`
       $appbarElement.headroom(headroomOptions);
 
@@ -104,4 +119,3 @@ $(function(){
     }
   });
 });
-

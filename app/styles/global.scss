@@ -10,8 +10,22 @@ $lightGrey: #e0e0e0;
   background-color: $warn;
 }
 
+.hl {
+  color: $blue;
+}
+
 .center {
   text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+p.tagline {
+  padding: 0;
+  margin: 0;
+  color: #999999;
 }
 
 abbr[title] {
@@ -94,6 +108,42 @@ a {
   }
 }
 
-#summary {
-  // position: fixed;
+body {
+  padding-top: 30px;
+}
+.featured-section {
+  background-color: #ffffff;
+}
+
+.featured-list__item {
+  background-color: #f0f0f0;
+}
+
+.featured-list__img {
+  padding-top: 100px;
+}
+
+footer {
+  padding: 0 0 50px;
+}
+
+.button--primary {
+  background: $blueSecondary;
+  color: white !important;
+  border: 1px solid $blue;
+}
+
+.contactbox {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .25), 0 1px 0 rgba(255, 255, 255, 0.25);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  background-color: rgba(0, 0, 0, 0.1);
+  .container {
+    padding-bottom: 50px;
+  }
+}
+
+.copyright {
+  p {
+    margin-right: 4.4%;
+  }
 }

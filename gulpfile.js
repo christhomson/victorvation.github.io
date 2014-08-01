@@ -62,18 +62,17 @@ gulp.task('images', function () {
 
 // Copy All Files At The Root Level (app)
 gulp.task('copy', function () {
-  return gulp.src(['app/*','!app/*.html'])
+  return gulp.src(['app/*','!app/*.html'], {dot: true})
     .pipe(gulp.dest('dist'))
     .pipe($.size({title: 'copy'}));
 });
 
 // Copy Web Fonts To Dist
 gulp.task('fonts', function () {
-  return gulp.src(['app/fonts/**'])
+  return gulp.src(['app/fonts/**',])
     .pipe(gulp.dest('dist/fonts'))
     .pipe($.size({title: 'fonts'}));
 });
-
 
 // Automatically Prefix CSS
 gulp.task('styles:css', function () {
@@ -100,7 +99,7 @@ gulp.task('styles:components', function () {
 
 // Compile Any Other Sass Files You Added (app/styles)
 gulp.task('styles:scss', function () {
-  return gulp.src(['app/styles/**/*.scss', '!app/styles/components/components.scss'])
+  return gulp.src(['app/styles/*.scss', '!app/styles/components/components.scss'])
     .pipe($.rubySass({
       style: 'expanded',
       precision: 10,
@@ -108,7 +107,7 @@ gulp.task('styles:scss', function () {
     }))
     .on('error', console.error.bind(console))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
-    .pipe(gulp.dest('.tmp/styles'))
+    .pipe(gulp.dest('dist/styles'))
     .pipe($.size({title: 'styles:scss'}));
 });
 
@@ -152,9 +151,13 @@ gulp.task('html', function () {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 // Watch Files For Changes & Reload
-gulp.task('serve', function () {
+gulp.task('serve', ['styles:components', 'styles:scss'], function () {
   browserSync({
     notify: false,
+    // Run as an https by uncommenting 'https: true'
+    // Note: this uses an unsigned certificate which on first access
+    //       will present a certificate warning in the browser.
+    // https: true,
     server: {
       baseDir: ['.tmp', 'app']
     }
@@ -171,15 +174,20 @@ gulp.task('serve', function () {
 gulp.task('serve:dist', ['default'], function () {
   browserSync({
     notify: false,
+    // Run as an https by uncommenting 'https: true'
+    // Note: this uses an unsigned certificate which on first access
+    //       will present a certificate warning in the browser.
+    // https: true,
     server: {
       baseDir: 'dist'
     }
+
   });
 });
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
-  runSequence('styles', ['jshint', 'html', 'images', 'fonts', 'copy'], cb);
+  runSequence('styles', [ 'html', 'images', 'fonts', 'copy'], cb);
 });
 
 // Run PageSpeed Insights
