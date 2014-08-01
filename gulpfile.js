@@ -62,7 +62,7 @@ gulp.task('images', function () {
 
 // Copy All Files At The Root Level (app)
 gulp.task('copy', function () {
-  return gulp.src(['app/*','!app/*.html'], {dot: true})
+  return gulp.src(['app/*', 'app/resume/*', '!app/*.html'], {dot: true})
     .pipe(gulp.dest('dist'))
     .pipe($.size({title: 'copy'}));
 });
@@ -103,10 +103,11 @@ gulp.task('styles:scss', function () {
     .pipe($.rubySass({
       style: 'expanded',
       precision: 10,
-      loadPath: ['app/styles']
+      loadPath: ['.tmp']
     }))
     .on('error', console.error.bind(console))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
+    .pipe($.csso())
     .pipe(gulp.dest('dist/styles'))
     .pipe($.size({title: 'styles:scss'}));
 });
@@ -149,6 +150,21 @@ gulp.task('html', function () {
 
 // Clean Output Directory
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
+
+// Font Awesome
+gulp.task('fa', function() {
+  return gulp.src('app/styles/font-awesome.min.css')
+    .pipe(gulp.dest('dist/styles'))
+    .pipe($.size({title: 'font-awesome'}));
+})
+
+// User JS
+gulp.task('user-js', function() {
+  return gulp.src('app/scripts/*.js')
+    .pipe($.uglify({preserveComments: 'some'}))
+    .pipe(gulp.dest('dist/scripts'))
+    .pipe($.size({title: 'user-js'}));
+})
 
 // Watch Files For Changes & Reload
 gulp.task('serve', ['styles:components', 'styles:scss'], function () {
@@ -197,7 +213,7 @@ gulp.task('pagespeed', pagespeed.bind(null, {
   // free (no API key) tier. You can use a Google
   // Developer API key if you have one. See
   // http://goo.gl/RkN0vE for info key: 'YOUR_API_KEY'
-  url: 'https://example.com',
+  url: 'http://victorszeto.com',
   strategy: 'mobile'
 }));
 
