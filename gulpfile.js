@@ -62,14 +62,14 @@ gulp.task('images', function () {
 
 // Copy All Files At The Root Level (app)
 gulp.task('copy', function () {
-  return gulp.src(['app/*', 'app/resume/*', '!app/*.html'], {dot: true})
+  return gulp.src(['app/*', '!app/*.html'], {dot: true})
     .pipe(gulp.dest('dist'))
     .pipe($.size({title: 'copy'}));
 });
 
 // Copy Web Fonts To Dist
 gulp.task('fonts', function () {
-  return gulp.src(['app/fonts/**',])
+  return gulp.src(['app/fonts/*',])
     .pipe(gulp.dest('dist/fonts'))
     .pipe($.size({title: 'fonts'}));
 });
@@ -108,7 +108,7 @@ gulp.task('styles:scss', function () {
     .on('error', console.error.bind(console))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe($.csso())
-    .pipe(gulp.dest('dist/styles'))
+    .pipe(gulp.dest('app/styles'))
     .pipe($.size({title: 'styles:scss'}));
 });
 
@@ -118,7 +118,8 @@ gulp.task('styles', ['styles:components', 'styles:scss', 'styles:css']);
 // Scan Your HTML For Assets & Optimize Them
 gulp.task('html', function () {
   return gulp.src('app/**/*.html')
-    .pipe($.useref.assets({searchPath: '{.tmp,app}'}))
+    .pipe($.useref.assets())
+    .on('error', console.error.bind(console))
     // Concatenate And Minify JavaScript
     .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
     // Remove Any Unused CSS
@@ -126,13 +127,14 @@ gulp.task('html', function () {
     // the next line to only include styles your project uses.
     .pipe($.if('*.css', $.uncss({
       html: [
-        'app/index.html',
-        'app/styleguide/index.html'
+        'app/index.html'
       ],
       // CSS Selectors for UnCSS to ignore
       ignore: [
         '.navdrawer-container.open',
-        /.app-bar.open/
+        /.app-bar.open/,
+        '.topbar--pinned',
+        '.topbar--unpinned'
       ]
     })))
     // Concatenate And Minify Styles
@@ -158,11 +160,10 @@ gulp.task('fa', function() {
     .pipe($.size({title: 'font-awesome'}));
 })
 
-// User JS
-gulp.task('user-js', function() {
-  return gulp.src('app/scripts/*.js')
-    .pipe($.uglify({preserveComments: 'some'}))
-    .pipe(gulp.dest('dist/scripts'))
+// Copy resume
+gulp.task('resume', function() {
+  return gulp.src('app/resume/*')
+    .pipe(gulp.dest('dist/resume'))
     .pipe($.size({title: 'user-js'}));
 })
 
@@ -187,7 +188,7 @@ gulp.task('serve', ['styles:components', 'styles:scss'], function () {
 });
 
 // Build and serve the output from the dist build
-gulp.task('serve:dist', ['default'], function () {
+gulp.task('serve:dist', function () {
   browserSync({
     notify: false,
     // Run as an https by uncommenting 'https: true'
@@ -203,7 +204,7 @@ gulp.task('serve:dist', ['default'], function () {
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
-  runSequence('styles', [ 'html', 'images', 'fonts', 'copy'], cb);
+  runSequence('styles', [ 'html', 'images', 'fonts', 'copy', 'resume'], cb);
 });
 
 // Run PageSpeed Insights

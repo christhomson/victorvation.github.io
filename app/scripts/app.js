@@ -1,3 +1,7 @@
+/*!
+ *  VictorSzeto.com JavaScript v0.0.1
+ *  Source: https://github.com/victorvation/victorvation.github.io/tree/dev
+ */
 var headroomOptions = {
   offset: 120,
   tolerance: 5,
