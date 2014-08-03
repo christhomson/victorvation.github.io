@@ -134,7 +134,8 @@ gulp.task('html', function () {
         '.navdrawer-container.open',
         /.app-bar.open/,
         '.topbar--pinned',
-        '.topbar--unpinned'
+        '.topbar--unpinned',
+        '.fa-spin'
       ]
     })))
     // Concatenate And Minify Styles
