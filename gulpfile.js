@@ -26,6 +26,7 @@ var del = require('del');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
 var pagespeed = require('psi');
+var wintersmith = require('wintersmith');
 var reload = browserSync.reload;
 
 var AUTOPREFIXER_BROWSERS = [
@@ -168,6 +169,14 @@ gulp.task('resume', function() {
     .pipe($.size({title: 'user-js'}));
 })
 
+gulp.task('blog', function() {
+  var file = 'blog/config.json';
+  var ws = wintersmith(file);
+  ws.build(function(err) {
+    if(err) throw err;
+    console.log('Built blog.');
+  })
+})
 // Watch Files For Changes & Reload
 gulp.task('serve', ['styles:components', 'styles:scss'], function () {
   browserSync({
@@ -205,7 +214,7 @@ gulp.task('serve:dist', function () {
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
-  runSequence('styles', [ 'html', 'images', 'fonts', 'copy', 'resume'], cb);
+  runSequence('styles', [ 'html', 'blog', 'images', 'fonts', 'copy', 'resume'], cb);
 });
 
 // Run PageSpeed Insights

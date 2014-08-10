@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Victor Szeto</title>
+    <atom:link href="http://www.victorszeto.com//feed.xml" rel="self" type="application/rss+xml"></atom:link>
+    <link>http://www.victorszeto.com/</link>
+    <description>blog</description>
+    <pubDate>Fri, 08  Aug 2014 20:00:00 -0400</pubDate>
+    <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
+    <language>en</language>
+    <item>
+      <title>Note: Old posts below</title>
+      <link>http://www.victorszeto.com//blog/posts/note-old-posts-below/</link>
+      <pubDate>Fri, 08  Aug 2014 20:00:00 -0400</pubDate>
+      <guid isPermaLink="true">http://www.victorszeto.com//blog/posts/note-old-posts-below/</guid>
+      <author></author>
+      <description>&lt;p&gt;Posts older than this one are pretty old. They might be misleading/inaccurate and links might be broken. They are maintained here for completeness purposes only.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Interactive calculator: two way data binding in AngularJS</title>
+      <link>http://www.victorszeto.com//blog/posts/interactive-calculator-two-way-data-binding-in-angularjs/</link>
+      <pubDate>Sat, 28 Dec 2013 19:00:00 -0500</pubDate>
+      <guid isPermaLink="true">http://www.victorszeto.com//blog/posts/interactive-calculator-two-way-data-binding-in-angularjs/</guid>
+      <author></author>
+      <description>&lt;p&gt;One of the most infamous and feared classes in ECE 1B is ECE 103: Discrete Mathematics. Most people that I’ve asked about it have unequivocally told me that it was the worst and most difficult class they’ve taken. Because of this, I’ve made an effort to try to read up on some elementary number theory before the term begins. One thing that I came upon and decided to implement in a small program was Euclid’s algorithim for finding the greatest common denominator. You can see the final product &lt;a href=&quot;http://www.victorszeto.com/gcd-calc&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;an-interactive-calculator&quot;&gt;An interactive calculator&lt;/h2&gt;
+&lt;p&gt;Calculating the GCD is simple enough. Euclid’s algorithm can be described like this: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Find the remainder of two integers &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt;. &lt;/li&gt;
+&lt;li&gt;Replace &lt;code&gt;a&lt;/code&gt; with &lt;code&gt;b&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt; with the remainder&lt;/li&gt;
+&lt;li&gt;Repeat until the remainder is zero.&lt;/li&gt;
+&lt;li&gt;The final &lt;code&gt;b&lt;/code&gt; value is the GCD.&lt;/li&gt;
+&lt;li&gt;This works because the final &lt;code&gt;b&lt;/code&gt; divides the final &lt;code&gt;a&lt;/code&gt;, and the final &lt;code&gt;a&lt;/code&gt; divided the previous &lt;code&gt;a&lt;/code&gt;, and so on,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This can be easily implemented in a program (here in C#):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; gcd(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; a, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; b) {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; b == &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; ? a : gcd(b,a%b);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This can be trivially translated to JavaScript and then made to accept user input in various ways, for example,  Mike Soares’ PHP &lt;a href=&quot;https://github.com/mikesoares/gcd_calculator&quot;&gt;implementation&lt;/a&gt; uses the URL - &lt;a href=&quot;http://www.example.com/gcd.php?a=12&amp;amp;b=20&quot;&gt;http://www.example.com/gcd.php?a=12&amp;amp;b=20&lt;/a&gt;, for example. I used AngularJS’ two-way binding two make a more “interactive” calculator that would output the calculated GCD without pressing any keys after typing in the numbers.&lt;/p&gt;
+&lt;h3 id=&quot;angularjs-variable-binding&quot;&gt;AngularJS variable binding&lt;/h3&gt;
+&lt;p&gt;As usual, I create my gcdCalc app:
+&lt;code&gt;app = angular.module(&amp;#39;gcdCalc&amp;#39;, [])&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;I declare it as the app it my HTML: &lt;code&gt;&amp;lt;html ng-app=&amp;quot;gcdCalc&amp;quot;&amp;gt;&lt;/code&gt;. I declare my controller, passing it &lt;code&gt;$scope&lt;/code&gt; as its only dependency.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;app.controller(&amp;#39;gcdController&amp;#39;, function($scope) {&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;In my HTML, I create two &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; fields, with the &lt;code&gt;ng-model&lt;/code&gt; attribute as two new variables, &lt;code&gt;aInput&lt;/code&gt; and &lt;code&gt;bInput&lt;/code&gt;. The corresponding variables and &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; tags are now bound together: any change in the variables will change the input, and any change in the input will change the variables. &lt;/p&gt;
+&lt;p&gt;Now, I use &lt;code&gt;$scope.$watchCollection&lt;/code&gt; to watch &lt;code&gt;aInput&lt;/code&gt; and &lt;code&gt;bInput&lt;/code&gt; for changes, and then if they are changed, I apply the &lt;code&gt;gcd()&lt;/code&gt; function to the two inputs and store the result in another variable.&lt;/p&gt;
+&lt;p&gt;Finally, I write all of this information in my HTML with the single way binding: &lt;code&gt;gcd( {{aInput}}, {{bInput}} ) = {{gcdOutput}}&lt;/code&gt;. &lt;/p&gt;
+&lt;h3 id=&quot;result&quot;&gt;Result&lt;/h3&gt;
+&lt;p&gt;Now I have an interactive calculator that automatically updates the webpage as I type. Doing this project really made apparent to me the power and simplicity of AngularJS, and how easy it is to make really cool self-updating pages, like single-page websites or webapps. You can see the final calculator program at &lt;a href=&quot;http://victorszeto.com/gcd-calc&quot;&gt;gcd-calc&lt;/a&gt;, and the source code &lt;a href=&quot;http://www.victorszeto.com/gcd-calc/gcd.js&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Web Scraping with Node.js</title>
+      <link>http://www.victorszeto.com//blog/posts/web-scraping-with-node-js/</link>
+      <pubDate>Thu, 26 Dec 2013 19:00:00 -0500</pubDate>
+      <guid isPermaLink="true">http://www.victorszeto.com//blog/posts/web-scraping-with-node-js/</guid>
+      <author></author>
+      <description>&lt;p&gt;After writing my &lt;a href=&quot;http://www.victorszeto.com/blog/2013/12/23/a-grade-checker-webapp-in-angularjs-php.html&quot;&gt;Grade Availability Checker&lt;/a&gt; using AngularJS to serve the information and somebody else’s PHP script to scrape Quest for grade information, the next logical step would be to write my own mark scraper. I wrote a program in Node.js to log into Quest, scrape grades and return them as JSON after a request to the server. You can find the source on GitHub: &lt;a href=&quot;http://github.com/victorvation/quest-markscraper&quot;&gt;quest-markscraper&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;web-scraping-in-node-js&quot;&gt;Web scraping in Node.js&lt;/h2&gt;
+&lt;p&gt;I chose Node.js because I already had a little bit of experience in it, and because I wanted to make something “API-like”. First, scrape the Quest website for grades, process them, and then print them out in JSON for my AngularJS app to display. &lt;/p&gt;
+&lt;h3 id=&quot;setting-the-server-with-express&quot;&gt;Setting the server with Express&lt;/h3&gt;
+&lt;p&gt;Setting up the server in Node is very easy. I used Express just in case I wanted to add more functionality or other API endpoints in the future. &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-JavaScript&quot;&gt;var app = express()
+app.get(&amp;#39;/&amp;#39;, callback)
+app.listen(port)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;getting-to-the-grades-with-request&quot;&gt;Getting to the grades with Request&lt;/h3&gt;
+&lt;p&gt;The first page to access websites is the Waterloo Quest main page, &lt;a href=&quot;https://quest.pecs.uwaterloo.ca/&quot;&gt;https://quest.pecs.uwaterloo.ca&lt;/a&gt;. First of all, I logged in normally and used the Chrome developer console to look at the resulting HTTP request. Using the &lt;a href=&quot;https://github.com/mikeal/request&quot;&gt;request&lt;/a&gt; package, I created an object to hold the request information: a URL to request, the type of request to send, an object called “headers” with &lt;code&gt;&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Windows NT 5.1; rv:2.0b6) Gecko/20100101 Firefox&amp;#39;&lt;/code&gt; so that Quest will accept my request, and a “form” with my username, password, and some other information.&lt;/p&gt;
+&lt;p&gt;I submit a request using &lt;code&gt;request.post(requestOptions, callback)&lt;/code&gt;. From there, it’s just a trial and error process of manually getting the HTTP request, finding the request URL, changing &lt;code&gt;requestOptions.url&lt;/code&gt; to that new URL, and then nesting the &lt;code&gt;request.get()&lt;/code&gt; or &lt;code&gt;request.post()&lt;/code&gt; appropriately until I get to the page that displays the grades.&lt;/p&gt;
+&lt;h3 id=&quot;data-processing-with-cheerio&quot;&gt;Data processing with Cheerio&lt;/h3&gt;
+&lt;p&gt;I used the &lt;a href=&quot;http://matthewmueller.github.io/cheerio/&quot;&gt;Cheerio&lt;/a&gt; to process the HTML. Cheerio uses jQuery-style syntax to look through the DOM and implements most core jQuery functionality. I create two arrays to hold my &lt;code&gt;classes&lt;/code&gt; and &lt;code&gt;grades&lt;/code&gt;, then use Cheerio’s &lt;code&gt;.each()&lt;/code&gt; function to find the corresponding elements and push &lt;code&gt;$(this).text()&lt;/code&gt; to the array. &lt;/p&gt;
+&lt;p&gt;Now, I make sure amount of grades is equal to the amount of classes, i.e. all grades are available, and create a variable &lt;code&gt;allAvailable&lt;/code&gt; to hold this. Also, I make sure that the length of my arrays is larger than 1, which is error checking just in case something messed up while scraping grades. &lt;/p&gt;
+&lt;h3 id=&quot;sending-a-json-response-with-underscore&quot;&gt;Sending a JSON Response with Underscore&lt;/h3&gt;
+&lt;p&gt;Next, I use the &lt;a href=&quot;http://underscorejs.org/&quot;&gt;Underscore&lt;/a&gt; for some object manipulation. I its use &lt;code&gt;_.object(classes,grades)&lt;/code&gt; to turn my two arrays into key-value pairs using &lt;code&gt;classes&lt;/code&gt; as the keys and &lt;code&gt;values&lt;/code&gt; as the values. Next, I use an if statement to determine the state of &lt;code&gt;allAvailable&lt;/code&gt;: if it’s false, I just return that it’s false. If it’s true, I use &lt;code&gt;_.extend()&lt;/code&gt; to put all this information together in one object: &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-JavaScript&quot;&gt;returnJSON = allAvailable ? _.extend({&amp;quot;allAvailable&amp;quot; : allAvailable}, {grades: gradeObj}) : returnJSON = {&amp;quot;allAvailable&amp;quot; : allAvailable}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, I send the response: &lt;code&gt;res.send(returnJSON)&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;deployment-on-heroku&quot;&gt;Deployment on Heroku&lt;/h3&gt;
+&lt;p&gt;My current web host doesn’t support Node.js, so I needed somewhere else to host my Node server. I decided to use &lt;a href=&quot;http://heroku.com&quot;&gt;Heroku&lt;/a&gt;, since they offer a basic plan that’s free. It was pretty easy to set up, and I used their &lt;a href=&quot;https://devcenter.heroku.com/articles/getting-started-with-nodejs&quot;&gt;Getting Started with Node.js on Heroku&lt;/a&gt; guide which was easy to follow. I also needed to change the port I was listening on to &lt;code&gt;process.env.PORT&lt;/code&gt;, since I don’t know the default port Heroku would use. &lt;/p&gt;
+&lt;h4 id=&quot;aside-environment-variables&quot;&gt;Aside: Environment variables&lt;/h4&gt;
+&lt;p&gt;My Quest username and password were just typed into the source code, which might have been safe enough on my computer, but wasn’t ideal for putting on Heroku, and definitely was a bad idea to push to GitHub. To solve this, I needed to set environment variables using &lt;code&gt;heroku config:add&lt;/code&gt; to add my username and password to the environment variables, and then change my username and password in the source code to &lt;code&gt;process.env.questID&lt;/code&gt;. &lt;/p&gt;
+&lt;h3 id=&quot;result&quot;&gt;Result&lt;/h3&gt;
+&lt;p&gt;I now have an API written in Node.js and deployed on Heroku. I switched my &lt;a href=&quot;http://victorszeto.com/grades&quot;&gt;Grade Checker&lt;/a&gt; to send a request to my herokuapp instead of the PHP script. Now the entire stack for the Grades app is written by me, partially using the &lt;a href=&quot;http://mean.io&quot;&gt;MEAN&lt;/a&gt; stack: MongoDB (which I didn’t use), Express.js, AngularJS, and Node.js (which I did use). It is deployed on Heroku at &lt;a href=&quot;http://quest-markscraper.herokuapp.com&quot;&gt;quest-markscraper.herokuapp.com&lt;/a&gt;. You can view the source on GitHub at &lt;a href=&quot;http://github.com/victorvation/quest-markscraper&quot;&gt;victorvation/quest-markscraper&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>A grade checker webapp in AngularJS/PHP</title>
+      <link>http://www.victorszeto.com//blog/posts/a-grade-checker-webapp-in-angularjs-php/</link>
+      <pubDate>Mon, 23 Dec 2013 19:00:00 -0500</pubDate>
+      <guid isPermaLink="true">http://www.victorszeto.com//blog/posts/a-grade-checker-webapp-in-angularjs-php/</guid>
+      <author></author>
+      <description>&lt;p&gt;Waterloo Fall 2013 “unofficial grades” were released last Monday, and by the looks of the ECE Facebook group, I wasn’t the only one who was refreshing Quest (the system Waterloo uses for student accounts) until the marks came up at 12 am. All marks were available except for ChE 102. I decided to make a mark checker so I would know when the rest of the grades became available. You can see the final product at &lt;a href=&quot;http://victorszeto.com/grades/&quot;&gt;victorszeto.com/grades&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;a-grade-checker-webapp-in-angularjs-php&quot;&gt;A grade checker webapp in AngularJS/PHP&lt;/h2&gt;
+&lt;p&gt;I found a &lt;a href=&quot;http://bn.gs/quest-markcheck.php&quot;&gt;Quest Mark Checker&lt;/a&gt; written in PHP by Alexander Huynh, which scrapes Quest and outputs the raw HTML for grades into a text file. It then prints the grades and writes the raw HTML of the grades to a text file. However, there were a few reasons why this wouldn’t work when building my webapp: &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Back-end - the PHP script was somewhat convoluted and didn’t actually parse the information, and so was difficult to use in a program.&lt;/li&gt;
+&lt;li&gt;Front-end - the PHP script output was just the raw HTML table of grades from Quest, which although is fine, I wanted to add some functionality and make it nicer to look at.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;hacking-together-a-php-back-end-api&quot;&gt;Hacking together a PHP back-end API&lt;/h3&gt;
+&lt;p&gt;For (1), I needed to make the output like an API, so I could easily process the response in order to do part (2).&lt;/p&gt;
+&lt;p&gt;Since the existing scraper worked well-enough, I decided to change it as little as possible. I added a new variable &lt;code&gt;$updated&lt;/code&gt;, which was initialized to &lt;code&gt;false&lt;/code&gt;, and would only return true if the grades file was modified. I also changed the output to JSON, making it a bit more “API-like” to make it easier to process the response.&lt;/p&gt;
+&lt;h3 id=&quot;creating-a-front-end-in-angularjs&quot;&gt;Creating a front-end in AngularJS&lt;/h3&gt;
+&lt;p&gt;For (2), I could have just used CSS and styled the output, however, I decided that I wanted to have the mark status updated every time I clicked a button. To do this, I wrote a front-end in AngularJS.&lt;/p&gt;
+&lt;h4 id=&quot;setting-up-angularjs&quot;&gt;Setting up AngularJS&lt;/h4&gt;
+&lt;p&gt;I chose &lt;a href=&quot;http://angularjs.org&quot;&gt;AngularJS&lt;/a&gt; simply because it looked relatively simple and seemed intuitive to implement. I changed the &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt; tag to &lt;code&gt;&amp;lt;html ng-app&amp;gt;&lt;/code&gt;, and linked to AngularJS from the CDN, and then defined the “controller” for my body using &lt;code&gt;&amp;lt;body ng-controller=&amp;quot;gradeController&amp;quot;&amp;gt;&lt;/code&gt;. Finally, I added &lt;code&gt;{{updated}}&lt;/code&gt; in my HTML, which is a binding to the variable &lt;code&gt;$scope.updated&lt;/code&gt; - it will automatically update when the variable is changed, and vice-versa.&lt;/p&gt;
+&lt;p&gt;In the HTML, I gave my refresh button two Angular directives: &lt;code&gt;ng-disabled&lt;/code&gt;, which disables the button when the expression is true, and &lt;code&gt;ng-click&lt;/code&gt;, which executes the expression when the button is clicked:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;button ng-disabled=&amp;quot;btnDisabled&amp;quot; ng-click=&amp;quot;checkMarks()&amp;quot;&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now, when &lt;code&gt;$scope.btnDisabled&lt;/code&gt; is true, the button will be disabled, and when the button is clicked, the function &lt;code&gt;$scope.checkMarks()&lt;/code&gt; will be called.&lt;/p&gt;
+&lt;p&gt;Then I wrote the JavaScript for the refresher. It contains a service, &lt;code&gt;GradeService&lt;/code&gt;, and a controller, &lt;code&gt;GradeController&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 id=&quot;grade-checking-service&quot;&gt;Grade checking service&lt;/h4&gt;
+&lt;p&gt;I make a custom service to hold my HTTP request and response processing. This isn’t strictly necessary for a simple app, but I chose to do so anyway. My service has a single dependency, &lt;code&gt;$http&lt;/code&gt;, and contains a single method, &lt;code&gt;get&lt;/code&gt;, which receives a callback as an argument and sends a GET request to the API.&lt;/p&gt;
+&lt;p&gt;Since I already changed the PHP script to return JSON, I can use a simple selection statement to process the JSON response, and then fire the callback.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;lang-javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (data.allAvailable == &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;)
+    callback(&lt;span class=&quot;string&quot;&gt;&quot;Yes!&quot;&lt;/span&gt;)
+&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; 
+    callback(&lt;span class=&quot;string&quot;&gt;&quot;Nope.&quot;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;grade-controller&quot;&gt;Grade controller&lt;/h4&gt;
+&lt;p&gt;Finally, I can create my controller. I initialize my two variables and create my function, &lt;code&gt;checkMarks&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I want the button to be disabled and the text to read “loading…” while my HTTP request is running, so in the function, I immediately change &lt;code&gt;$scope.updated&lt;/code&gt; to &lt;code&gt;&amp;quot;loading...&amp;quot;&lt;/code&gt; and &lt;code&gt;$scope.btnDisabled&lt;/code&gt; to true. Then I use the built in AngularJS method for a HTTP request: &lt;code&gt;$http.get(&amp;#39;http://victorszeto.com/gradeAPI.php&amp;#39;).then()&lt;/code&gt;. &lt;/p&gt;
+&lt;h3 id=&quot;final-product&quot;&gt;Final product&lt;/h3&gt;
+&lt;p&gt;I’ve now created my first webapp, using “API-centric” design. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A PHP script scrapes Quest for marks, checks if there are any new grades, and returns a JSON object with that information.&lt;/li&gt;
+&lt;li&gt;A web page shows this information with some pretty CSS styling and a button to refresh the results. &lt;/li&gt;
+&lt;li&gt;An AngularJS script gets takes this information and writes a string depending on what was returned. A method bound to the button on the page updates the information without reloading the page.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A demo of this can be seen at &lt;a href=&quot;http://victorszeto,com/grades&quot;&gt;victorszeto.com/grades&lt;/a&gt;, or you can view the &lt;a href=&quot;http://victorszeto.com/grades/gradeRefresh.js&quot;&gt;AngularJS source&lt;/a&gt;. My next step will be making my replacing the hacked-together PHP scraper with a mark scraper I will write for myself in Node.js.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Wintersmith: A Static Site Generator</title>
+      <link>http://www.victorszeto.com//blog/posts/wintersmith-a-static-site-generator/</link>
+      <pubDate>Sat, 21 Dec 2013 19:00:00 -0500</pubDate>
+      <guid isPermaLink="true">http://www.victorszeto.com//blog/posts/wintersmith-a-static-site-generator/</guid>
+      <author></author>
+      <description>&lt;p&gt;Static site generators have become really popular recently, so much so that one &lt;a href=&quot;https://news.ycombinator.com/item?id=5388973&quot;&gt;Hacker News&lt;/a&gt; comment called it “the next ‘hello world’ when learning a new language”. Rather than using Wordpress or some other blog-creating site, I decided to try a static site generator and see how far I could get with my limited web-development knowledge.&lt;/p&gt;
+&lt;h2 id=&quot;wintersmith&quot;&gt;Wintersmith&lt;/h2&gt;
+&lt;p&gt;I came across &lt;a href=&quot;http://wintersmith.io&quot;&gt;Wintersmith&lt;/a&gt;, which is written with &lt;a href=&quot;http://nodejs.org&quot;&gt;Node.js&lt;/a&gt; in &lt;a href=&quot;http://coffeescript.org&quot;&gt;CoffeeScript&lt;/a&gt;, both of which are languages that I’ve recently had an interest in. Also, posts are written in Markdown, which I also have a recently-discovered love of. It has a very nice plug-in system, and uses &lt;a href=&quot;http://jade-lang.com&quot;&gt;Jade&lt;/a&gt; for templating. &lt;/p&gt;
+&lt;p&gt;Even with minimal exposure to Node, Jade, and web development in general, Wintersmith is quite easy to set up:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;npm install wintersmith -g&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;And then to create a website: &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wintersmith new &amp;lt;path&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This creates a basic website skeleton:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;contents&lt;/strong&gt;, a folder that holds each post and it’s images in a separate file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;templates&lt;/strong&gt;, a folder that holds the &lt;code&gt;.jade&lt;/code&gt; files that are used to build the site&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;config.json&lt;/strong&gt;, a file that holds configuration information and local variables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All of which is quite intuitive and easy to use. Another incredibly convenient feature of Wintersmith is it’s previewing feature:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wintersmith preview&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Wintersmith uses Node to create a local http server which allows you to see any changes to your site instantly just by looking at &lt;code&gt;127.0.0.1:8080&lt;/code&gt; in your browser. As a lifetime Windows user, it was a new experience to be able to change some config file or stylesheet and see it instantly updated with a refresh. &lt;/p&gt;
+&lt;p&gt;Setting up Wintersmith was actually a great learning experience for me, from fixing a bug in Jade, a language that I’ve never previously heard of before (the github repo uses &lt;code&gt;!!! 5&lt;/code&gt; rather than &lt;code&gt;doctype html&lt;/code&gt;, the former of which is deprecated) to just messing around with the stylesheet and seeing the changes through the whole site. It also helped me brush up a lot on my CSS and HTML skills as well as giving me great exposure to Jade. &lt;/p&gt;
+&lt;p&gt;Finally, the results are just amazing. The site loads quickly and looks beautiful. I’m looking forward to improving the site and adding more as time goes on. Wintersmith is intuitive and easy to set up, while being fast and extensible. I would highly recommend it. You can find the source for my blog on &lt;a href=&quot;http://www.github.com/victorvation/blog.victorszeto.com/&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+  </channel>
+</rss>

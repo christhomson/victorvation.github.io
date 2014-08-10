@@ -1,0 +1,40 @@
+{
+  "locals": {
+    "url": "http://www.victorszeto.com/",
+    "name": "Victor Szeto",
+    "owner": "Victor Szeto",
+    "author": "Victor Szeto",
+    "description": "blog",
+    "googleTrackingCode": "UA-46624647-1",
+    "disqus": {
+      "url": "http://victorszeto.disqus.com",
+      "shortname": "victorszeto"
+    }
+  },
+  "plugins": [
+    "./plugins/paginator.coffee",
+    "./plugins/pageNameTemplate.coffee"
+  ],
+  "require": {
+    "moment": "moment",
+    "_": "underscore",
+    "typogr": "typogr"
+  },
+  "jade": {
+    "pretty": true
+  },
+  "markdown": {
+    "smartLists": true,
+    "smartypants": true
+  },
+  "paginator": {
+    "perPage": 3
+  },
+  "blog": {
+    "postsDir": "articles",
+    "template": "article.jade",
+    "filenameTemplate": "/posts/:title/index.html"
+  },
+  "baseUrl": "/blog",
+  "output": "../dist/blog"
+}
