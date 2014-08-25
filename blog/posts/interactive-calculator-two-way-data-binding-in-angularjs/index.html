@@ -24,8 +24,8 @@
     <div id="content">
       <div class="content-wrap">
         <article class="article">
-          <section class="content"><p>One of the most infamous and feared classes in <span class="caps">ECE</span> 1B is ECE 103: Discrete Mathematics. Most people that I’ve asked about it have unequivocally told me that it was the worst and most difficult class they’ve taken. Because of this, I’ve made an effort to try to read up on some elementary number theory before the term begins. One thing that I came upon and decided to implement in a small program was Euclid’s algorithim for finding the greatest common denominator. You can see the final product <a href="http://www.victorszeto.com/gcd-calc">here</a>.</p>
-<h2 id="an-interactive-calculator">An interactive&nbsp;calculator</h2>
+          <section class="content"><p>One of the most infamous and feared classes in <span class="caps">ECE</span> 1B is <span class="caps">ECE</span> 103: Discrete Mathematics. Most people that I’ve asked about it have unequivocally told me that it was the worst and most difficult class they’ve taken. Because of this, I’ve made an effort to try to read up on some elementary number theory before the term begins. One thing that I came upon and decided to implement in a small program was Euclid’s algorithim for finding the greatest common denominator. You can see the final product <a href="http://www.victorszeto.com/gcd-calc">here</a>.</p>
+<h2 id="an-interactive-calculator">An interactive calculator</h2>
 <p>Calculating the <span class="caps">GCD</span> is simple enough. Euclid’s algorithm can be described like&nbsp;this: </p>
 <ul>
 <li>Find the remainder of two integers <code>a</code> and <code>b</code>. </li>
@@ -40,7 +40,7 @@
 }
 </code></pre>
 <p>This can be trivially translated to JavaScript and then made to accept user input in various ways, for example,  Mike Soares’ <span class="caps">PHP</span> <a href="https://github.com/mikesoares/gcd_calculator">implementation</a> uses the <span class="caps">URL</span> - <a href="http://www.example.com/gcd.php?a=12&amp;b=20">http://www.example.com/gcd.php?a=12&amp;b=20</a>, for example. I used AngularJS’ two-way binding two make a more “interactive” calculator that would output the calculated <span class="caps">GCD</span> without pressing any keys after typing in the&nbsp;numbers.</p>
-<h3 id="angularjs-variable-binding">AngularJS variable&nbsp;binding</h3>
+<h3 id="angularjs-variable-binding">AngularJS variable binding</h3>
 <p>As usual, I create my gcdCalc app:
 <code>app = angular.module(&#39;gcdCalc&#39;, [])</code></p>
 <p>I declare it as the app it my <span class="caps">HTML</span>: <code>&lt;html ng-app=&quot;gcdCalc&quot;&gt;</code>. I declare my controller, passing it <code>$scope</code> as its only&nbsp;dependency.</p>
