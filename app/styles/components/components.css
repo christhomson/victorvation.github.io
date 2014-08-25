@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
 *
 * Main Stylesheet
@@ -956,7 +957,7 @@ pre {
     position: relative;
   }
   .editorial-header .container:before {
-    content: "\e003";
+    content: "";
     font-family: "icons";
     font-size: 1000px;
     line-height: 0;
@@ -1446,7 +1447,7 @@ pre {
   }
 }
 .did-you-know__symbol:after {
-  content: "\e014";
+  content: "";
   color: #3372df;
   font-family: "icons";
   font-size: 300px;
@@ -1574,7 +1575,7 @@ pre {
 }
 @media only screen and (min-width: 620px) {
   .next-lessons:after {
-    content: "\e00e";
+    content: "";
     font-family: "icons";
     font-size: 150px;
     right: 40px;
@@ -1993,18 +1994,18 @@ li > p {
 
 .button--primary {
   background: #4285f4;
-  color: white;
+  color: #ffffff;
   border: 1px solid #1266f1;
 }
 
 .button--secondary {
-  background: white;
+  background: #ffffff;
   color: #3372df;
   border: 1px solid #e6e6e6;
 }
 
 .button--secondary-variation {
-  background: white;
+  background: #ffffff;
   color: #3372df;
   border: 1px solid #e6e6e6;
   border-color: transparent;
@@ -2391,7 +2392,7 @@ a:hover {
   font-family: "icons";
   line-height: 25px;
   font-size: 13px;
-  content: "\e005";
+  content: "";
 }
 
 .cta--secondary {
