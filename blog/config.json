@@ -33,7 +33,7 @@
   "blog": {
     "postsDir": "articles",
     "template": "article.jade",
-    "filenameTemplate": "/posts/:title/index.html"
+    "filenameTemplate": "/:title/index.html"
   },
   "baseUrl": "/blog",
   "output": "../dist/blog"

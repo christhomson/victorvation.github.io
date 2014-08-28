@@ -162,8 +162,8 @@ button.menu img {
 }
 
 .app-bar, .navdrawer-container, main {
-  -webkit-transition: -webkit-transform 0.3s ease-out;
-          transition: transform 0.3s ease-out;
+  -webkit-transition: -webkit-transform 0.4s ease-out;
+          transition: transform 0.4s ease-out;
 }
 
 .navdrawer-container h4,

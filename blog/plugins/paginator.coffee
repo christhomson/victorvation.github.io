@@ -20,7 +20,7 @@ module.exports = (env, callback) ->
     # note that each article is assumed to have its own directory in the articles directory
     articles = contents[options.articles]._.directories.map (item) -> item.index
     # skip articles that does not have a template associated
-    articles = articles.filter (item) -> item.template isnt 'none'
+    # articles = articles.filter (item) -> item.template isnt 'none'
     # sort article by date
     articles.sort (a, b) -> b.date - a.date
     return articles
@@ -89,3 +89,4 @@ module.exports = (env, callback) ->
 
   # tell the plugin manager we are done
   callback()
+4
