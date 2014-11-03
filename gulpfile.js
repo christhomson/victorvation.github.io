@@ -152,7 +152,6 @@ gulp.task('html', function () {
       removeAttributeQuotes: true,
       removeRedundantAttributes: true,
       collapseWhitespace: true,
-      removeEmptyElements: true
     })))
     // Output Files
     .pipe(gulp.dest('dist'))
