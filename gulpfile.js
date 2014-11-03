@@ -146,7 +146,14 @@ gulp.task('html', function () {
     // Update Production Style Guide Paths
     .pipe($.replace('components/components.css', 'components/main.min.css'))
     // Minify Any HTML
-    .pipe($.if('*.html', $.minifyHtml()))
+    .pipe($.if('*.html', $.htmlmin({
+      removeComments: true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes: true,
+      removeRedundantAttributes: true,
+      collapseWhitespace: true,
+      removeEmptyElements: true
+    })))
     // Output Files
     .pipe(gulp.dest('dist'))
     .pipe($.size({title: 'html'}));
