@@ -228,6 +228,7 @@ main {
 @media all and (min-width: 990px) {
   .app-bar {
     position: relative;
+
   }
 
   .app-bar.open,
