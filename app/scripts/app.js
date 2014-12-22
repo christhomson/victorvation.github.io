@@ -83,6 +83,12 @@ $(function(){
     $(this).toggleClass('fa-spin');
   });
 
+  $('figure').each(function() {
+    $(this).on('click', function() {
+      location.href = $(this).data('href');
+    }.bind(this));
+  })
+
   var unpinTopbar = function() {
     var pinnedElement = $navdrawerElement.hasClass('topbar--pinned')
       ? $navdrawerElement

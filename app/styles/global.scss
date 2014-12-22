@@ -191,10 +191,10 @@ footer {
   overflow: hidden;
   margin: 10px 1%;
   min-width: 320px;
-  max-width: 480px;
-  max-height: 360px;
+  max-width: 360px;
+  max-height: 280px;
   width: 48%;
-  background: #3085a3;
+
   text-align: center;
   cursor: pointer;
 }
@@ -300,7 +300,7 @@ figure.effect-zoe p.description {
   position: absolute;
   bottom: 5em;
   padding: .75rem;
-  margin: 0 .5rem 0 0;
+  margin: 0 1rem 0 0;
   color: #fff;
   text-transform: none;
   font-size: 90%;
@@ -325,7 +325,7 @@ figure.effect-zoe p.icon-links a i {
 
 figure.effect-zoe h2 {
   display: inline-block;
-  font-size: 38px;
+  font-size: 32px;
 }
 
 figure.effect-zoe:hover p.description {
