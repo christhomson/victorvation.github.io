@@ -172,14 +172,17 @@ footer {
   }
 }
 
-
+.bs {
+  padding-bottom: 50px;
+}
 /***** Zoe from Subtle Hover *****/
 
 .grid {
   position: relative;
   margin: 0 auto;
-  padding: 1em 0 4em;
+  padding: 1em 2em 4em;
   max-width: 1000px;
+  // height: auto;
   list-style: none;
   text-align: center;
 }
@@ -189,10 +192,12 @@ footer {
   position: relative;
   float: left;
   overflow: hidden;
+  // background: #3085a3;
+  // background: $blue;
   margin: 10px 1%;
   min-width: 320px;
-  max-width: 360px;
-  max-height: 280px;
+  max-width: 400px;
+  max-height: 300px;
   width: 48%;
 
   text-align: center;
@@ -202,9 +207,10 @@ footer {
 .grid figure img {
   position: relative;
   display: block;
-  min-height: 100%;
-  max-width: 100%;
-  opacity: 0.8;
+  // min-height: 100%;
+  // max-width: 100%;
+  // opacity: 0.8;
+  margin: .222rem auto;
 }
 
 .grid figure figcaption {
@@ -234,8 +240,9 @@ footer {
 /* Anchor will cover the whole item by default */
 /* For some effects it will show as a button */
 .grid figure figcaption > a {
-  z-index: 1000;
+  z-index: 500;
   text-indent: 200%;
+  width: 70%;
   white-space: nowrap;
   font-size: 0;
   opacity: 0;
@@ -259,7 +266,6 @@ footer {
   letter-spacing: 1px;
   font-size: 68.5%;
 }
-
 
 figure.effect-zoe figcaption {
   top: auto;
@@ -319,13 +325,18 @@ figure.effect-zoe p.icon-links a {
   transform: translate3d(0,200%,0);
 }
 
-figure.effect-zoe p.icon-links a i {
+figure.effect-zoe p.icon-links a {
   padding: 4px 6px;
+  z-index: 1005;
 }
 
 figure.effect-zoe h2 {
   display: inline-block;
   font-size: 32px;
+}
+
+figure.effect-zoe h2.mini{
+  font-size: 28px;
 }
 
 figure.effect-zoe:hover p.description {
