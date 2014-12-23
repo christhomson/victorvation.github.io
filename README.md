@@ -10,3 +10,8 @@ The site is hosted on Github pages, I use git-subtree to push source code to the
 2. `git commit -am` to commit all changes & built files
 3. Deploy the site: `git subtree push --prefix dist origin master` to push the `dist` folder to master.
 4. Push the source to Github: `git push origin dev`.
+
+## Installing 
+1. `git clone git@github.com:VictorVation/victorvation.github.io.git`
+2. `cd victorvation.github.io`
+3. `npm install && cd blog && npm install`
