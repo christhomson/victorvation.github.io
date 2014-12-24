@@ -5,13 +5,13 @@ If you want to read the source, the main interesting parts are in `app/index.htm
 
 The site is hosted on Github pages, I use git-subtree to push source code to the `dev` branch and only the `dist` folder to master. I use Cloudflare for DNS hosting, apparently their CNAME flattening feature makes it so Github pages that are hosted on apex domains (i.e. `victorszeto.com`, not `www.victorzeto.com`) don't get bounced around on redirects. So there's that.
 
+## Installing 
+1. `git clone git@github.com:VictorVation/victorvation.github.io.git`
+2. `cd victorvation.github.io`
+3. `npm install && cd blog && npm install`
+
 ## Building
 1. Build and package files: `gulp` to build the files into `dist`
 2. `git commit -am` to commit all changes & built files
 3. Deploy the site: `git subtree push --prefix dist origin master` to push the `dist` folder to master.
 4. Push the source to Github: `git push origin dev`.
-
-## Installing 
-1. `git clone git@github.com:VictorVation/victorvation.github.io.git`
-2. `cd victorvation.github.io`
-3. `npm install && cd blog && npm install`
