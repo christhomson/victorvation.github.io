@@ -118,15 +118,20 @@ gulp.task('styles', ['styles:components', 'styles:scss', 'styles:css']);
 
 // Scan Your HTML For Assets & Optimize Them
 gulp.task('html', function () {
+  var jsFilter = $.filter("**/*.js");
+  var cssFilter = $.filter("**/*.css");
+  var htmlFilter = $.filter("**/*.html");
+
   return gulp.src('app/**/*.html')
     .pipe($.useref.assets())
     .on('error', console.error.bind(console))
-    // Concatenate And Minify JavaScript
-    .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
-    // Remove Any Unused CSS
-    // Note: If not using the Style Guide, you can delete it from
-    // the next line to only include styles your project uses.
-    .pipe($.if('*.css', $.uncss({
+
+    .pipe(jsFilter)
+    .pipe($.uglify({preserveComments: 'some'}))
+    .pipe(jsFilter.restore())
+
+    .pipe(cssFilter)
+    .pipe($.uncss({
       html: [
         'app/index.html'
       ],
@@ -138,21 +143,25 @@ gulp.task('html', function () {
         '.topbar--unpinned',
         '.fa-spin'
       ]
-    })))
-    // Concatenate And Minify Styles
-    .pipe($.if('*.css', $.csso()))
+    }))
+    .pipe($.csso())
+    .pipe(cssFilter.restore())
+    .pipe($.rev())
     .pipe($.useref.restore())
     .pipe($.useref())
-    // Update Production Style Guide Paths
+    .pipe($.revReplace())
     .pipe($.replace('components/components.css', 'components/main.min.css'))
+
     // Minify Any HTML
-    .pipe($.if('*.html', $.htmlmin({
+    .pipe(htmlFilter)
+    .pipe($.htmlmin({
       removeComments: true,
       collapseBooleanAttributes: true,
       removeAttributeQuotes: true,
       removeRedundantAttributes: true,
       collapseWhitespace: true,
-    })))
+    }))
+    .pipe(htmlFilter.restore())
     // Output Files
     .pipe(gulp.dest('dist'))
     .pipe($.size({title: 'html'}));
