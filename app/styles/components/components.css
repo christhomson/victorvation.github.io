@@ -1299,7 +1299,7 @@ pre {
   margin-top: 12px;
   padding-top: 13px;
 }
-.quote__content:before {
+.quote__content::before {
   content: open-quote;
   display: block;
   position: absolute;
@@ -1311,7 +1311,7 @@ pre {
   font-size: 260px;
 }
 @media only screen and (min-width: 620px) {
-  .quote__content:before {
+  .quote__content::before {
     top: 225px;
     left: -210px;
     font-size: 540px;

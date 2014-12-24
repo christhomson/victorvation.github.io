@@ -115,17 +115,20 @@ body {
   padding-top: 30px;
 }
 .featured-section {
-  background-color: #ffffff;
+  background-color: #f0f0f0;
 }
 
 .featured-list__item {
-  background-color: #f0f0f0;
+  background-color: #ffffff;
 }
 
 .featured-list__img {
   padding-top: 100px;
 }
 
+.quote {
+  min-height: 200px;
+}
 footer {
   padding: 0 0 50px;
 }
