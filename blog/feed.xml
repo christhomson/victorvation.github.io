@@ -5,9 +5,18 @@
     <atom:link href="http://www.victorszeto.com//feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://www.victorszeto.com/</link>
     <description>blog</description>
-    <pubDate>Thu, 28  Aug 2014 12:33:00 -0400</pubDate>
+    <pubDate>Tue, 20 Jan 2015 12:33:00 -0500</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>My Unconventional Journey to PennApps</title>
+      <link>http://www.victorszeto.com//blog/my-unconventional-journey-to-pennapps/</link>
+      <pubDate>Tue, 20 Jan 2015 12:33:00 -0500</pubDate>
+      <guid isPermaLink="true">http://www.victorszeto.com//blog/my-unconventional-journey-to-pennapps/</guid>
+      <author></author>
+      <description>&lt;p&gt;On Friday, January 16, 2015, with less than twelve hours notice, I got on a bus that I wasn’t signed up for, to attend a a hackathon that had already rejected me. Read the full blog post on Medium: &lt;a href=&quot;https://medium.com/@vis/my-pennapps-experience-7d47f090b4b&quot;&gt;My Unconventional Journey to PennApps&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>1A ECE</title>
       <link>http://www.victorszeto.com//blog/1a-ece/</link>
